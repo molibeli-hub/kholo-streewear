@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Kholo Streetwear</title>
+    <meta name="description" content="Find Kholo Streetwear's Braamfontein studio and pop-up market location, or send us a message.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ============ HEADER / NAVIGATION ============ -->
+    <header class="site-header">
+        <nav class="nav container">
+            <a href="index.html" class="logo">KHOLO<span>.</span></a>
+
+            <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+
+            <ul class="nav-links" id="primary-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="enquiry.html">Enquire</a></li>
+                <li><a href="contact.html" aria-current="page">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ============ PAGE INTRO ============ -->
+        <section class="page-hero">
+            <div class="container">
+                <span class="eyebrow">Find us</span>
+                <h1>Studio &amp;<br>street stalls.</h1>
+                <p>Visit the studio during the week, or catch us at our regular Braamfontein pop-up on weekends.</p>
+            </div>
+        </section>
+
+        <!-- ============ LOCATIONS (more than one, as required) ============ -->
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <h2>Our locations</h2>
+                    <span class="tag">Johannesburg</span>
+                </div>
+
+                <div class="locations">
+                    <div class="location-card">
+                        <iframe class="map" loading="lazy"
+                            src="https://www.google.com/maps?q=14+Henri+Street,+Braamfontein,+Johannesburg&output=embed"
+                            title="Map showing Kholo Studio in Braamfontein"></iframe>
+                        <div class="info">
+                            <span class="tag-label">Studio &amp; showroom</span>
+                            <h3>Kholo Studio</h3>
+                            <p>14 Henri Street, Braamfontein, Johannesburg, 2001</p>
+                            <p style="margin-top:0.5rem;">Mon–Fri: 09:00–17:00</p>
+                        </div>
+                    </div>
+
+                    <div class="location-card">
+                        <iframe class="map" loading="lazy"
+                            src="https://www.google.com/maps?q=73+Juta+Street,+Braamfontein,+Johannesburg&output=embed"
+                            title="Map showing Kholo's weekend pop-up market stall"></iframe>
+                        <div class="info">
+                            <span class="tag-label">Weekend pop-up</span>
+                            <h3>Braamfontein Market Stall</h3>
+                            <p>73 Juta Street, Braamfontein, Johannesburg, 2001</p>
+                            <p style="margin-top:0.5rem;">Sat–Sun: 09:00–14:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CONTACT FORM ============ -->
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <h2>Send us a message</h2>
+                </div>
+
+                <div class="form-wrap">
+                    <!-- data-static-form is used by js/script.js to intercept submission
+                         since this Part 1 build has no backend yet -->
+                    <form data-static-form novalidate>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="c-name">Full name</label>
+                                <input type="text" id="c-name" name="c-name" required autocomplete="name">
+                            </div>
+                            <div class="field">
+                                <label for="c-email">Email address</label>
+                                <input type="email" id="c-email" name="c-email" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="c-subject">Subject</label>
+                            <input type="text" id="c-subject" name="c-subject" required>
+                        </div>
+
+                        <div class="field">
+                            <label for="c-message">Message</label>
+                            <textarea id="c-message" name="c-message" rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn">Send message</button>
+
+                        <p class="form-note">For stockist or sponsorship requests, please use the <a href="enquiry.html" style="text-decoration:underline;">enquiry page</a> instead.</p>
+
+                        <div class="form-status" role="status" aria-live="polite"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">KHOLO<span>.</span></a>
+                    <p style="color:var(--grey); margin-top:0.75rem; max-width:32ch; font-size:0.9rem;">Bold, locally made streetwear, grown in Johannesburg.</p>
+                    <div class="stamp" style="width:96px;height:96px;" data-stamp></div>
+                </div>
+
+                <div>
+                    <h3>Site</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Get in touch</h3>
+                    <ul>
+                        <li><a href="enquiry.html">Enquire</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Follow</h3>
+                    <ul>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 Kholo Streetwear. Hypothetical brand created for a student website project.</span>
+                <span>Site by Molibeli Molapo</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
