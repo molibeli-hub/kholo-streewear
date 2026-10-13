@@ -1,9 +1,9 @@
-# Kholo Streetwear — Website (Part 2)
+# Kholo Streetwear — Website (Part 3)
 
 A static HTML/CSS/JS website for **Kholo Streetwear**, a hypothetical Johannesburg
-streetwear label, built for the Web Development module. Part 1 (structure and
-content) was approved by the lecturer; this submission adds Part 2 — CSS
-styling and responsive design.
+streetwear label, built for the Web Development module. Parts 1 and 2 were
+approved by the lecturer with no corrections requested. This submission adds
+Part 3 — enhanced functionality, SEO, form validation, and deployment.
 
 ## Project overview
 
@@ -18,26 +18,14 @@ brand a permanent home beyond Instagram and market stalls.
 - Build brand credibility through professional presentation of products and story.
 - Collect enquiries from potential stockists and sponsors.
 
-## Key features and functionality
-
-- Responsive 5-page site: Home, About, Products, Enquire, Contact.
-- Sticky header with a mobile nav toggle, now with a drop-shadow for depth.
-- Reusable "stamp" badge component rendered via JavaScript (`js/script.js`).
-- Product grid across four ranges: Tees, Hoodies, Headwear, Accessories, each
-  illustrated with original SVG/PNG icon artwork (see Part 2 → Images below).
-- Stockist/sponsorship enquiry form and a general contact form (front-end only —
-  both intercept submission with JavaScript and show a status message, since no
-  backend exists yet at this stage of the project).
-- Contact page shows two real locations (studio + weekend pop-up) with embedded maps.
-
 ## Sitemap
 
 ```
-index.html      Homepage — hero, featured categories, brand statement, CTA
+index.html      Homepage — hero, featured categories, FAQ accordion, CTA
 about.html      About Us — history/timeline, mission & vision, values, audience
-products.html   Products — Tees / Hoodies / Headwear / Accessories, with prices
+products.html   Products — tabs + search/filter over a JS-driven product grid
 enquiry.html    Enquiry — stockist / sponsorship / collaboration form
-contact.html    Contact — studio + pop-up locations (map), general contact form
+contact.html    Contact — interactive Leaflet map, general contact form
 ```
 
 ## File structure
@@ -49,98 +37,135 @@ kholo-streetwear/
 ├── products.html
 ├── enquiry.html
 ├── contact.html
+├── robots.txt
+├── sitemap.xml
 ├── css/
 │   └── style.css
 ├── js/
 │   └── script.js
 ├── images/
-│   ├── icon-*.svg               (10 original icons/illustrations, master files)
-│   └── icon-*-400.png / -800.png (rasterised at 2 sizes for srcset, see below)
-├── documents/
-│   ├── Website_Project_Proposals.docx
-│   ├── Kholo_Streetwear_Content_Research.docx
-│   ├── kholo-streetwear-sitemap.png
-│   └── screenshots/              (Part 2 responsive-testing evidence, see below)
+│   └── icon-*.svg / icon-*.png   (10 original icons/illustrations)
 └── README.md
 ```
 
 ---
 
-## Part 2 — CSS Styling and Responsive Design
+## Part 3 — Enhancing Functionality and SEO
 
-### 1. Working through feedback from Part 1
+### 1. Working through feedback from Parts 1 and 2
 
-Part 1 was approved by the lecturer with no requested corrections. No structural
-or content changes were required going into Part 2; all work below is new
-styling and responsiveness added on top of the approved Part 1 submission.
+Both Part 1 and Part 2 were approved by the lecturer with no requested
+corrections. All work below is new, added on top of the approved submissions.
 
-### 2. CSS styling for desktop
+### 2. Functionality
 
-**2.1 External stylesheet** — a single `css/style.css` is linked from all five
-HTML pages, so every page shares one source of truth for styling.
+**2.1 Interactive elements**
+- **FAQ accordion** on the homepage (`js/script.js` → `initAccordion()`) —
+  custom-built with `aria-expanded`/`aria-controls`, not the native
+  `<details>` element, so behaviour and animation are fully controlled.
+- **Category tabs** on Products (`initProductsPage()`), filtering the grid
+  by Tees / Hoodies / Headwear / Accessories.
+- **Lightbox gallery** — clicking any product image opens a larger view in a
+  modal (`initLightbox()`), closable via the × button, a click outside, or
+  <kbd>Escape</kbd>, with focus returned to the trigger on close.
+- **Interactive map** — the Contact page uses **Leaflet** (free, no API key)
+  with OpenStreetMap tiles (`initMap()`), plotting both locations with
+  clickable markers and popups, replacing the static map embed from Part 2.
+- **Scroll-reveal animation** — sections fade/slide in via
+  `IntersectionObserver` (`initScrollReveal()`) as the page is scrolled,
+  combining CSS transitions with JS. This has a safety-net timeout so
+  content is never left invisible for users, screen readers or crawlers
+  that don't trigger a scroll event.
 
-**2.2 Base style** — a universal box-sizing reset (`* { box-sizing: border-box;
-margin: 0; padding: 0; }`) removes browser inconsistencies, and `:root` holds
-every colour, font and spacing value as a CSS custom property, so the whole
-site's look is controlled from one place at the top of the file.
+**2.2 Dynamic content**
+- The entire product catalogue lives in one JavaScript data array
+  (`PRODUCTS` in `js/script.js`) rather than being hand-written as HTML.
+  `products.html` renders every card from that array via `renderProducts()`.
+- A **search box** filters products by name/description in real time, and
+  works together with the category tabs (`initProductsPage()` → `apply()`),
+  showing a live "X of 12 products" count and a friendly empty state.
 
-**2.3 Typography** — a documented type scale (`--text-xs` through `--text-3xl`)
-keeps font sizes consistent instead of one-off values scattered through the
-file; `font-family`, `letter-spacing` and `line-height` are set per role
-(display headings vs. mono labels vs. body copy).
+### 3. Search Engine Optimisation (SEO)
 
-**2.4 Layout structure** — Flexbox drives the nav bar and button groups;
-CSS Grid drives the product grid, the hero's two-column split, and the footer's
-four-column layout — switching column counts at each breakpoint (see below).
+**3.1 On-page SEO**
+- Unique, keyword-rich `<title>` and `<meta name="description">` on every page.
+- `<link rel="canonical">` and Open Graph tags on every page for clean social
+  sharing/search-result previews.
+- A single `<h1>` per page with a logical H2/H3 hierarchy underneath.
+- Descriptive image file names (`icon-tee.png`, not `img1.png`) and
+  descriptive `alt` text on every image.
+- Clean, descriptive URLs (`products.html`, `contact.html`) — already
+  satisfied by the site's flat multi-page structure.
+- Internal linking: FAQ answers link to `enquiry.html`; CTAs link between
+  Products and Enquiry; the nav and footer link every page to every other.
+- Mobile-friendly, responsive layout (verified in Part 2 and re-tested here).
 
-**2.5 Visual styles** — colour, background, border and `box-shadow` are used
-throughout (card hover lift, sticky header shadow, form panel shadow).
-Interactive states are implemented for all three pseudo-classes the brief
-asks for: `:hover`, `:focus-visible` (used instead of bare `:focus` so the
-outline only shows for keyboard users, not mouse clicks — the accessible
-modern equivalent), and `:active` (buttons, nav links, cards and form fields
-all have a distinct pressed state).
+**3.2 Off-page SEO**
+- *Backlinks* and *social media promotion* aren't something a static project
+  folder can implement directly — our strategy: once deployed, share the
+  live link via the brand's Instagram/TikTok bio (referenced throughout the
+  site) and, if a real brand, outreach to Johannesburg fashion blogs.
+- *Local SEO* — implemented directly via **schema.org `ClothingStore`
+  structured data** (JSON-LD) on `contact.html`, with address, opening
+  hours and price range, so search engines can show Kholo as a local
+  business result.
 
-### 3. Responsive design
+**3.3 Additional requests**
+- `robots.txt` at the project root, allowing all crawlers and pointing to
+  the sitemap.
+- `sitemap.xml` listing all 5 pages with priority/change-frequency hints.
+- *Page speed*: every image has explicit `width`/`height` attributes (so
+  the browser reserves space and avoids layout shift) and `loading="lazy"`;
+  Google Fonts are loaded with `rel="preconnect"` to cut connection latency.
+- *Security*: a hidden **honeypot field** on both forms catches simple
+  spam bots (a real field a bot fills in, but which is invisible and
+  unreachable for a human, so a non-empty value means it's a bot — the
+  submission is silently dropped); every external link uses
+  `rel="noopener noreferrer"`; no inline scripts are used anywhere, only
+  the external `js/script.js`; HTTPS is automatic once deployed to Netlify
+  or GitHub Pages (see Deployment below).
 
-**3.1 Breakpoints** — two media queries, documented in the CSS itself:
+### 4. Form Functionality and Validation
 
-| Breakpoint | Width | What changes |
-|---|---|---|
-| Desktop | default (no query) | 3-column product grid, 2-column hero/split sections, full horizontal nav |
-| Tablet | `max-width: 900px` | Product grid → 2 columns, hero/split sections stack to 1 column |
-| Mobile | `max-width: 640px` | Nav collapses into a hamburger menu, every remaining grid → 1 column |
+Both `enquiry.html` and `contact.html` use the same validation engine
+(`validateField()` / `validateForm()` in `js/script.js`): required fields,
+email-format checking, and minimum-length checks are enforced in JavaScript
+and shown as **inline error text under each field** (not just the browser's
+default tooltip), with focus automatically moved to the first invalid field.
 
-**3.2 Relative units** — spacing uses a `rem`-based scale (`--space-1`...`--space-6`),
-type sizes are `rem`/`em`-based (plus `clamp()` for headings so they scale
-fluidly between breakpoints instead of jumping), and layout widths use `%`/`fr`
-units rather than fixed pixels.
+- **`contact.html`** — once validated, the form compiles the visitor's name,
+  email and message into a `mailto:` link and opens it, so the **visitor's
+  own email client** sends the message to Kholo's address — exactly as the
+  brief specifies ("the customer/client should be able to send the email to
+  the recipient stated in the code").
+- **`enquiry.html`** — once validated, the form computes and displays a
+  response relevant to **cost and availability** based on the enquiry type
+  selected (minimum order, turnaround time, next steps), and — for stockist
+  enquiries with a quantity entered — an **estimated wholesale cost**
+  (quantity × average unit price). There's no real backend, so this uses a
+  short simulated delay (disabled button, "Submitting...") to mirror the UX
+  of an asynchronous submission, which is clearly noted in the result message
+  rather than implied to be a live calculation from a server.
 
-**3.3 Responsive images** — all 12 product icons and 4 illustrations use real
-`srcset`/`sizes`, e.g.:
+### 5. Deployment
 
-```html
-<img src="images/icon-tee-400.png"
-     srcset="images/icon-tee-400.png 400w, images/icon-tee-800.png 800w"
-     sizes="(max-width: 640px) 45vw, 220px"
-     alt="Illustrated icon of the Foundation Tee" loading="lazy">
-```
+The site is a fully static set of HTML/CSS/JS files, so it can be deployed
+to any free static host with no build step:
 
-Each icon exists as an original SVG master plus two rasterised PNGs (400px and
-800px wide), so the browser picks the resolution appropriate to its viewport
-instead of always downloading the largest file. `loading="lazy"` is set on
-every product image so off-screen images don't block initial page load.
+**Option A — Netlify (drag-and-drop, fastest)**
+1. Go to [app.netlify.com/drop](https://app.netlify.com/drop).
+2. Drag the whole `kholo-streetwear` folder onto the page.
+3. Netlify gives you a live HTTPS URL immediately.
 
-**3.4 Test and iterate** — tested in Chrome across the three breakpoints above.
-Screenshot evidence for all 5 pages at desktop (1440px), tablet (768px) and
-mobile (375px) is in `documents/screenshots/`. Homepage examples:
+**Option B — GitHub Pages**
+1. Push this folder to the GitHub repository (as already required for submission).
+2. In the repo, go to **Settings → Pages**.
+3. Under "Build and deployment", set **Source** to "Deploy from a branch",
+   branch `main`, folder `/ (root)`.
+4. GitHub publishes the site at `https://<username>.github.io/<repo-name>/`
+   within a minute or two.
 
-| Desktop | Tablet | Mobile |
-|---|---|---|
-| ![Homepage desktop](documents/screenshots/index-desktop.png) | ![Homepage tablet](documents/screenshots/index-tablet.png) | ![Homepage mobile](documents/screenshots/index-mobile.png) |
-
-The full set (`about`, `products`, `enquiry`, `contact` × 3 widths each) is in
-the same folder for reference.
+Either option gives automatic HTTPS, satisfying the security requirement above.
 
 ---
 
@@ -149,38 +174,67 @@ the same folder for reference.
 1. Weeks 1–2: Research, planning and lecturer approval of proposal — **Part 1, approved**.
 2. Weeks 3–4: Content sourcing, sitemap and wireframes — **Part 1, approved**.
 3. Weeks 5–7: HTML structure and content integration — **Part 1, approved**.
-4. Weeks 8–9: Styling, functionality and responsive/cross-browser testing — **this submission (Part 2)**.
-5. Week 10: Final review, debugging and submission (Part 3).
+4. Weeks 8–9: Styling, functionality and responsive/cross-browser testing — **Part 2, approved**.
+5. Week 10: JavaScript interactivity, SEO, form validation and deployment — **this submission (Part 3)**.
 
 ## References
 
 - GeeksforGeeks, 2024. *Sitemap planning in UX design.* [online] Available at:
   <https://www.geeksforgeeks.org/sitemap-planning-in-ux-design/> [Accessed 31 July 2026].
 - Google Fonts, n.d. *Anton, Space Grotesk and IBM Plex Mono.* [online] Available at:
-  <https://fonts.google.com/> [Accessed 31 July 2026]. (SIL Open Font License — free
-  for commercial use.)
-- MDN Web Docs, n.d. *Responsive images.* [online] Available at:
-  <https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Responsive_images>
-  [Accessed 16 September 2026]. (Referenced for correct `srcset`/`sizes` syntax.)
+  <https://fonts.google.com/> [Accessed 31 July 2026]. (SIL Open Font License.)
+- Leaflet, n.d. *Leaflet — an open-source JavaScript library for interactive maps.*
+  [online] Available at: <https://leafletjs.com/> [Accessed 16 September 2026].
+- OpenStreetMap Contributors, n.d. *OpenStreetMap.* [online] Available at:
+  <https://www.openstreetmap.org/copyright> [Accessed 16 September 2026]. (Map tile data.)
+- MDN Web Docs, n.d. *Intersection Observer API.* [online] Available at:
+  <https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API>
+  [Accessed 16 September 2026].
+- MDN Web Docs, n.d. *Client-side form validation.* [online] Available at:
+  <https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Form_validation>
+  [Accessed 16 September 2026].
+- Schema.org, n.d. *ClothingStore.* [online] Available at:
+  <https://schema.org/ClothingStore> [Accessed 16 September 2026]. (Structured
+  data used for local SEO on the Contact page.)
+- Google Search Central, n.d. *SEO Starter Guide.* [online] Available at:
+  <https://developers.google.com/search/docs/fundamentals/seo-starter-guide>
+  [Accessed 16 September 2026].
+- Netlify, n.d. *Deploy a site using drag and drop.* [online] Available at:
+  <https://docs.netlify.com/deploy/manual-deploys/> [Accessed 16 September 2026].
+- GitHub Docs, n.d. *Configuring a publishing source for your GitHub Pages site.*
+  [online] Available at:
+  <https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site>
+  [Accessed 16 September 2026].
 
 ## Changelog
 
-- **v0.1** (Part 1) — Initial static build: 5 HTML pages, shared stylesheet, nav,
-  forms, stamp badge. Approved by lecturer with no corrections requested.
-- **v0.2** (Part 2) —
-  - Added 10 original SVG icons/illustrations (`/images`) plus 400px/800px PNG
-    exports of each, replacing the Part 1 text placeholders in every product
-    card and illustration slot.
-  - Wired all product/illustration images with real `srcset`/`sizes`/`loading="lazy"`
-    for responsive image loading (rubric 3.3).
-  - Added a documented typography scale (`--text-xs`–`--text-3xl`) to `:root`
-    and applied it across headings, labels and body copy (rubric 2.3).
-  - Added explicit `:active` states to buttons, nav links, cards and form
-    fields, alongside the existing `:hover`/`:focus-visible` states (rubric 2.5).
-  - Added `box-shadow` to the sticky header and form panels for extra visual
-    depth (rubric 2.5).
-  - Documented the two responsive breakpoints (tablet/mobile) directly in the
-    CSS with comments explaining what changes at each (rubric 3.1).
-  - Captured and added screenshot evidence for all 5 pages across desktop/
-    tablet/mobile breakpoints to `documents/screenshots/` (rubric 3.4).
-
+- **v0.1** (Part 1) — Initial static build: 5 HTML pages, shared stylesheet,
+  nav, forms, stamp badge. Approved by lecturer, no corrections requested.
+- **v0.2** (Part 2) — Added original icon/illustration artwork across all
+  product and CTA slots; documented typography scale; `:active` states and
+  `box-shadow` for richer interaction feedback; documented responsive
+  breakpoints; captured screenshot evidence at desktop/tablet/mobile widths.
+  Approved by lecturer, no corrections requested.
+- **v0.3** (Part 3) —
+  - Added FAQ accordion, category tabs, search/filter, and a product-image
+    lightbox (all vanilla JS, no framework dependency).
+  - Rebuilt the product grid to render dynamically from a single JS data
+    array instead of hand-written HTML per card.
+  - Replaced the static Contact map embed with an interactive Leaflet map
+    (clickable markers, popups).
+  - Added scroll-reveal animation with a guaranteed-visible safety net.
+  - Added full on-page SEO: unique titles/descriptions, canonical links,
+    Open Graph tags, `robots.txt`, `sitemap.xml`, and `ClothingStore`
+    structured data for local SEO.
+  - Added page-speed optimisations: explicit image dimensions, lazy
+    loading, font preconnects.
+  - Added security measures: honeypot spam field on both forms,
+    `rel="noopener noreferrer"` on all external links.
+  - Rebuilt form validation in JavaScript with inline per-field error
+    messages (not browser-default tooltips) and focus management.
+  - Contact form now compiles a `mailto:` link so the visitor sends the
+    email themselves, per the brief's requirement.
+  - Enquiry form now computes and displays a dynamic response (turnaround,
+    minimum order, estimated wholesale cost) based on the enquiry type and
+    quantity entered.
+  - Added deployment instructions for Netlify and GitHub Pages.
