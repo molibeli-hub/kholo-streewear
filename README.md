@@ -69,8 +69,9 @@ corrections. All work below is new, added on top of the approved submissions.
   modal (`initLightbox()`), closable via the × button, a click outside, or
   <kbd>Escape</kbd>, with focus returned to the trigger on close.
 - **Interactive map** — the Contact page uses **Leaflet** (free, no API key)
-  with OpenStreetMap tiles (`initMap()`), plotting both locations with
-  clickable markers and popups, replacing the static map embed from Part 2.
+  with **Esri's World Street Map tiles** (`initMap()`) — see the tile-provider
+  note below — plotting both locations with clickable markers and popups,
+  replacing the static map embed from Part 2.
 - **Scroll-reveal animation** — sections fade/slide in via
   `IntersectionObserver` (`initScrollReveal()`) as the page is scrolled,
   combining CSS transitions with JS. This has a safety-net timeout so
@@ -187,6 +188,11 @@ Either option gives automatic HTTPS, satisfying the security requirement above.
   [online] Available at: <https://leafletjs.com/> [Accessed 16 September 2026].
 - OpenStreetMap Contributors, n.d. *OpenStreetMap.* [online] Available at:
   <https://www.openstreetmap.org/copyright> [Accessed 16 September 2026]. (Map tile data.)
+- Esri, n.d. *World Street Map.* [online] Available at:
+  <https://www.arcgis.com/home/item.html?id=3b93337983e9436f8db950e38a8629af>
+  [Accessed 14 October 2026]. (Free, no-API-key map tiles — used after both
+  OpenStreetMap's own tile servers and CARTO's basemaps turned out to block
+  or require an account for this kind of hosted, keyless use.)
 - MDN Web Docs, n.d. *Intersection Observer API.* [online] Available at:
   <https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API>
   [Accessed 16 September 2026].
@@ -238,3 +244,11 @@ Either option gives automatic HTTPS, satisfying the security requirement above.
     minimum order, estimated wholesale cost) based on the enquiry type and
     quantity entered.
   - Added deployment instructions for Netlify and GitHub Pages.
+- **v0.3.1** — Switched the Leaflet map's tile provider from OpenStreetMap's
+  own servers (which return 403 "Access blocked" for hosted/cloud-deployed
+  sites — they're reserved for light local development) to CARTO's free
+  basemap tiles.
+- **v0.3.2** — CARTO's basemap tiles turned out to require a free account/API
+  key (policy change), so switched again to **Esri's World Street Map**
+  tiles — a long-standing free, no-signup public tile service — which is
+  what the map actually uses now.
