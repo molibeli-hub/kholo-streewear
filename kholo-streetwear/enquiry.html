@@ -3,19 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enquire — Kholo Streetwear</title>
-    <meta name="description" content="Send Kholo Streetwear a stockist, sponsorship or collaboration enquiry.">
+    <title>Stockist &amp; Sponsorship Enquiries | Kholo Streetwear</title>
+    <meta name="description" content="Enquire about stocking Kholo Streetwear at your store, sponsoring a drop, or collaborating on a pop-up — get an instant estimate of cost, turnaround and next steps.">
+    <link rel="canonical" href="https://kholostreetwear.co.za/enquiry.html">
+    <meta property="og:title" content="Enquire — Kholo Streetwear">
+    <meta property="og:description" content="Stockist, sponsorship and collaboration enquiries.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kholostreetwear.co.za/enquiry.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- ============ HEADER / NAVIGATION ============ -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!--
+        ENQUIRY PAGE (enquiry.html)
+        Purpose: capture stockist, sponsorship and collaboration leads.
+        On submit, js/script.js validates every field inline (no bare
+        browser tooltips), then computes and displays a response relevant
+        to cost/availability for the chosen enquiry type (Part 3, section 4).
+    -->
+
     <header class="site-header">
-        <nav class="nav container">
+        <nav class="nav container" aria-label="Primary">
             <a href="index.html" class="logo">KHOLO<span>.</span></a>
-
             <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-
             <ul class="nav-links" id="primary-nav">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -26,32 +40,37 @@
         </nav>
     </header>
 
-    <main>
-        <!-- ============ PAGE INTRO ============ -->
+    <main id="main">
         <section class="page-hero">
             <div class="container">
                 <span class="eyebrow">Work with us</span>
                 <h1>Stock us.<br>Sponsor us.<br>Collab with us.</h1>
-                <p>Whether you run a store, organise pop-ups, or want to back a drop, tell us about it below and we'll get back to you within a few days.</p>
+                <p>Whether you run a store, organise pop-ups, or want to back a drop, tell us about it below. We'll show you an instant estimate of cost and turnaround based on what you select.</p>
             </div>
         </section>
 
-        <!-- ============ ENQUIRY FORM ============ -->
-        <section>
+        <section class="reveal">
             <div class="container">
                 <div class="form-wrap">
-                    <!-- data-static-form is used by js/script.js to intercept submission
-                         since this Part 1 build has no backend yet -->
-                    <form data-static-form novalidate>
+                    <form id="enquiry-form" novalidate>
+                        <!-- Honeypot: invisible to real visitors, but a bot filling every
+                             field will fill this too — if it's non-empty we silently drop
+                             the submission (Part 3, security) -->
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="enq-website">Leave this field empty</label>
+                            <input type="text" id="enq-website" name="enq-website" tabindex="-1" autocomplete="off">
+                        </div>
 
                         <div class="field-row">
                             <div class="field">
                                 <label for="fullname">Full name</label>
-                                <input type="text" id="fullname" name="fullname" required autocomplete="name">
+                                <input type="text" id="fullname" name="fullname" required autocomplete="name" minlength="2">
+                                <p class="field-error"></p>
                             </div>
                             <div class="field">
                                 <label for="email">Email address</label>
                                 <input type="email" id="email" name="email" required autocomplete="email">
+                                <p class="field-error"></p>
                             </div>
                         </div>
 
@@ -59,6 +78,7 @@
                             <div class="field">
                                 <label for="business">Business / brand name</label>
                                 <input type="text" id="business" name="business" autocomplete="organization">
+                                <p class="field-error"></p>
                             </div>
                             <div class="field">
                                 <label for="enquiry-type">Enquiry type</label>
@@ -69,26 +89,38 @@
                                     <option value="collab">Collaboration / pop-up</option>
                                     <option value="general">General enquiry</option>
                                 </select>
+                                <p class="field-error"></p>
                             </div>
                         </div>
 
                         <div class="field">
+                            <label for="quantity">Estimated quantity (stockists only, optional)</label>
+                            <input type="number" id="quantity" name="quantity" min="0" step="1" placeholder="e.g. 50">
+                            <p class="field-error"></p>
+                        </div>
+
+                        <div class="field">
                             <label for="message">Tell us more</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Store location, event details, or what you have in mind..."></textarea>
+                            <textarea id="message" name="message" rows="5" required minlength="10" placeholder="Store location, event details, or what you have in mind..."></textarea>
+                            <p class="field-error"></p>
                         </div>
 
                         <button type="submit" class="btn">Send enquiry</button>
-
                         <p class="form-note">We usually reply within 3–5 business days.</p>
 
                         <div class="form-status" role="status" aria-live="polite"></div>
+
+                        <!-- Dynamic response, filled in by JS after validation (Part 3, section 4) -->
+                        <div class="response-panel" aria-live="polite">
+                            <h4></h4>
+                            <dl></dl>
+                        </div>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ============ FOOTER ============ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
@@ -97,7 +129,6 @@
                     <p style="color:var(--grey); margin-top:0.75rem; max-width:32ch; font-size:0.9rem;">Bold, locally made streetwear, grown in Johannesburg.</p>
                     <div class="stamp" style="width:96px;height:96px;" data-stamp></div>
                 </div>
-
                 <div>
                     <h3>Site</h3>
                     <ul>
@@ -106,7 +137,6 @@
                         <li><a href="products.html">Products</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Get in touch</h3>
                     <ul>
@@ -114,16 +144,14 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Follow</h3>
                     <ul>
-                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <span>&copy; 2026 Kholo Streetwear. Hypothetical brand created for a student website project.</span>
                 <span>Site by Molibeli Molapo</span>
