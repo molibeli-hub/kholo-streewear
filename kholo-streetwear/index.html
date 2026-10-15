@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kholo Streetwear — Jozi Made</title>
-    <meta name="description" content="Kholo Streetwear is a Johannesburg streetwear label making bold, locally made tees, hoodies, caps and accessories.">
+    <title>Kholo Streetwear | Locally Made Johannesburg Streetwear — Jozi Made</title>
+    <meta name="description" content="Kholo Streetwear is a Johannesburg streetwear label making bold, locally made tees, hoodies, caps and accessories since 2022. Shop the range or enquire about stockist and sponsorship opportunities.">
+    <link rel="canonical" href="https://kholostreetwear.co.za/index.html">
+
+    <!-- Open Graph tags: SEO section 3.1, improves link previews on social media -->
+    <meta property="og:title" content="Kholo Streetwear — Jozi Made">
+    <meta property="og:description" content="Bold, locally made streetwear from Braamfontein, Johannesburg.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kholostreetwear.co.za/index.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- ============ HEADER / NAVIGATION ============ -->
-    <!-- Same header markup is repeated on every page so the nav works site-wide -->
+    <!-- Skip link: accessibility + SEO best practice, lets keyboard/screen-reader users bypass the nav -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!--
+        HOMEPAGE (index.html)
+        Sections: header/nav -> hero -> featured categories -> brand
+        statement -> FAQ accordion -> stockist CTA -> footer
+    -->
+
     <header class="site-header">
-        <nav class="nav container">
+        <nav class="nav container" aria-label="Primary">
             <a href="index.html" class="logo">KHOLO<span>.</span></a>
-
             <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-
             <ul class="nav-links" id="primary-nav">
                 <li><a href="index.html" aria-current="page">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -27,8 +42,7 @@
         </nav>
     </header>
 
-    <main>
-        <!-- ============ HERO ============ -->
+    <main id="main">
         <section class="hero">
             <div class="container">
                 <div class="hero-copy">
@@ -40,23 +54,19 @@
                         <a href="about.html" class="btn btn-outline">Our story</a>
                     </div>
                 </div>
-
-                <!-- Signature element: rotating stamp badge, built by js/script.js -->
                 <div class="stamp" data-stamp></div>
             </div>
         </section>
 
-        <!-- ============ FEATURED CATEGORIES ============ -->
-        <section class="categories">
+        <section class="categories reveal">
             <div class="container">
                 <div class="section-head">
                     <h2>What we make</h2>
                     <span class="tag">4 core ranges</span>
                 </div>
-
                 <div class="grid">
                     <article class="card">
-                        <div class="card-media">Tee range</div>
+                        <div class="card-media"><img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&amp;fit=crop&amp;w=800&amp;q=80" class="is-photo" alt="Photo of a black Kholo Streetwear t-shirt" width="400" height="400" loading="lazy"></div>
                         <div class="card-body">
                             <span class="drop">DROP 003</span>
                             <h3>The Foundation Tee</h3>
@@ -64,9 +74,8 @@
                             <span class="price">From R450</span>
                         </div>
                     </article>
-
                     <article class="card">
-                        <div class="card-media">Hoodie range</div>
+                        <div class="card-media"><img src="https://images.unsplash.com/photo-1622567893612-a5345baa5c9a?auto=format&amp;fit=crop&amp;w=800&amp;q=80" class="is-photo" alt="Photo of a black Kholo Streetwear hoodie" width="400" height="400" loading="lazy"></div>
                         <div class="card-body">
                             <span class="drop">DROP 002</span>
                             <h3>The Khulu Hoodie</h3>
@@ -74,9 +83,8 @@
                             <span class="price">From R950</span>
                         </div>
                     </article>
-
                     <article class="card">
-                        <div class="card-media">Headwear range</div>
+                        <div class="card-media"><img src="images/icon-cap.png" alt="Illustrated icon of a Kholo Streetwear bucket cap" width="400" height="400" loading="lazy"></div>
                         <div class="card-body">
                             <span class="drop">DROP 004</span>
                             <h3>Jozi Bucket Cap</h3>
@@ -88,15 +96,51 @@
             </div>
         </section>
 
-        <!-- ============ BRAND STATEMENT ============ -->
-        <section class="statement">
+        <section class="statement reveal">
             <div class="container">
                 <blockquote>We don't design for trends. We design for <span>Jozi's streets.</span></blockquote>
             </div>
         </section>
 
-        <!-- ============ STOCKIST / SPONSORSHIP TEASER ============ -->
-        <section class="cta-band">
+        <!-- FAQ accordion — JS-driven interactive element (Part 3, 2.1) -->
+        <section class="reveal">
+            <div class="container">
+                <div class="section-head">
+                    <h2>Frequently asked</h2>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1" id="faq-1-trigger">
+                            Do you ship outside Johannesburg?
+                            <span class="accordion-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="accordion-panel" id="faq-1" role="region" aria-labelledby="faq-1-trigger">
+                            <div class="accordion-panel-inner">Not yet — right now Kholo is only available at our Braamfontein studio and weekend market stall. National shipping is on the roadmap as the brand grows.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2" id="faq-2-trigger">
+                            How often do you release new drops?
+                            <span class="accordion-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="accordion-panel" id="faq-2" role="region" aria-labelledby="faq-2-trigger">
+                            <div class="accordion-panel-inner">Roughly every two to three months. Follow our Instagram for exact drop dates — each one is limited, and past drops don't get restocked.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3" id="faq-3-trigger">
+                            Can my store stock Kholo products?
+                            <span class="accordion-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="accordion-panel" id="faq-3" role="region" aria-labelledby="faq-3-trigger">
+                            <div class="accordion-panel-inner">Yes — head to our <a href="enquiry.html">enquiry page</a> and select "Become a stockist." We'll send you wholesale pricing and minimum order details.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-band reveal">
             <div class="container split">
                 <div>
                     <span class="eyebrow" style="color:var(--orange)">Partner with us</span>
@@ -106,12 +150,14 @@
                         <a href="enquiry.html" class="btn">Send an enquiry</a>
                     </div>
                 </div>
-                <div class="media-block">Stockists &amp; sponsors</div>
+                <div class="media-block">
+                    <img src="images/illustration-partner.svg" alt="Illustration of two hands shaking, representing a partnership" loading="lazy">
+                    <span>Stockists &amp; sponsors</span>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- ============ FOOTER ============ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
@@ -120,7 +166,6 @@
                     <p style="color:var(--grey); margin-top:0.75rem; max-width:32ch; font-size:0.9rem;">Bold, locally made streetwear, grown in Johannesburg.</p>
                     <div class="stamp" style="width:96px;height:96px;" data-stamp></div>
                 </div>
-
                 <div>
                     <h3>Site</h3>
                     <ul>
@@ -129,7 +174,6 @@
                         <li><a href="products.html">Products</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Get in touch</h3>
                     <ul>
@@ -137,16 +181,14 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Follow</h3>
                     <ul>
-                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <span>&copy; 2026 Kholo Streetwear. Hypothetical brand created for a student website project.</span>
                 <span>Site by Molibeli Molapo</span>
