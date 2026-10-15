@@ -3,19 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact — Kholo Streetwear</title>
-    <meta name="description" content="Find Kholo Streetwear's Braamfontein studio and pop-up market location, or send us a message.">
+    <title>Visit Us in Braamfontein | Kholo Streetwear Contact</title>
+    <meta name="description" content="Find Kholo Streetwear's Braamfontein studio and weekend pop-up market stall on an interactive map, or send us a message directly.">
+    <link rel="canonical" href="https://kholostreetwear.co.za/contact.html">
+    <meta property="og:title" content="Contact Kholo Streetwear">
+    <meta property="og:description" content="Studio and pop-up locations in Braamfontein, Johannesburg.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kholostreetwear.co.za/contact.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Leaflet (free, no API key) for the interactive map below (Part 3, section 2.1) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
+    <!-- Local business structured data (SEO section 3.2, Local SEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "Kholo Streetwear",
+      "image": "https://kholostreetwear.co.za/images/icon-tee.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "14 Henri Street",
+        "addressLocality": "Braamfontein, Johannesburg",
+        "postalCode": "2001",
+        "addressCountry": "ZA"
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "17:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "09:00", "closes": "14:00" }
+      ],
+      "priceRange": "R150 - R1050"
+    }
+    </script>
 </head>
 <body>
 
-    <!-- ============ HEADER / NAVIGATION ============ -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!--
+        CONTACT PAGE (contact.html)
+        An interactive Leaflet map (not a static embed) plots both
+        locations with clickable markers. The contact form below compiles
+        the visitor's message into a pre-filled email that THEY send from
+        their own mail client (see js/script.js initContactForm()).
+    -->
+
     <header class="site-header">
-        <nav class="nav container">
+        <nav class="nav container" aria-label="Primary">
             <a href="index.html" class="logo">KHOLO<span>.</span></a>
-
             <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-
             <ul class="nav-links" id="primary-nav">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -26,29 +66,27 @@
         </nav>
     </header>
 
-    <main>
-        <!-- ============ PAGE INTRO ============ -->
+    <main id="main">
         <section class="page-hero">
             <div class="container">
                 <span class="eyebrow">Find us</span>
                 <h1>Studio &amp;<br>street stalls.</h1>
-                <p>Visit the studio during the week, or catch us at our regular Braamfontein pop-up on weekends.</p>
+                <p>Visit the studio during the week, or catch us at our regular Braamfontein pop-up on weekends. Click a marker on the map for details.</p>
             </div>
         </section>
 
-        <!-- ============ LOCATIONS (more than one, as required) ============ -->
-        <section>
+        <section class="reveal">
             <div class="container">
                 <div class="section-head">
                     <h2>Our locations</h2>
                     <span class="tag">Johannesburg</span>
                 </div>
 
+                <!-- Interactive Leaflet map, initialised by js/script.js initMap() -->
+                <div id="map" role="application" aria-label="Interactive map of Kholo Streetwear locations"></div>
+
                 <div class="locations">
                     <div class="location-card">
-                        <iframe class="map" loading="lazy"
-                            src="https://www.google.com/maps?q=14+Henri+Street,+Braamfontein,+Johannesburg&output=embed"
-                            title="Map showing Kholo Studio in Braamfontein"></iframe>
                         <div class="info">
                             <span class="tag-label">Studio &amp; showroom</span>
                             <h3>Kholo Studio</h3>
@@ -56,11 +94,7 @@
                             <p style="margin-top:0.5rem;">Mon–Fri: 09:00–17:00</p>
                         </div>
                     </div>
-
                     <div class="location-card">
-                        <iframe class="map" loading="lazy"
-                            src="https://www.google.com/maps?q=73+Juta+Street,+Braamfontein,+Johannesburg&output=embed"
-                            title="Map showing Kholo's weekend pop-up market stall"></iframe>
                         <div class="info">
                             <span class="tag-label">Weekend pop-up</span>
                             <h3>Braamfontein Market Stall</h3>
@@ -72,42 +106,45 @@
             </div>
         </section>
 
-        <!-- ============ CONTACT FORM ============ -->
-        <section>
+        <section class="reveal">
             <div class="container">
-                <div class="section-head">
-                    <h2>Send us a message</h2>
-                </div>
+                <div class="section-head"><h2>Send us a message</h2></div>
 
                 <div class="form-wrap">
-                    <!-- data-static-form is used by js/script.js to intercept submission
-                         since this Part 1 build has no backend yet -->
-                    <form data-static-form novalidate>
+                    <form id="contact-form" novalidate>
+                        <!-- Honeypot field (Part 3 security) -->
+                        <div class="hp-field" aria-hidden="true">
+                            <label for="c-website">Leave this field empty</label>
+                            <input type="text" id="c-website" name="c-website" tabindex="-1" autocomplete="off">
+                        </div>
 
                         <div class="field-row">
                             <div class="field">
                                 <label for="c-name">Full name</label>
-                                <input type="text" id="c-name" name="c-name" required autocomplete="name">
+                                <input type="text" id="c-name" name="c-name" required autocomplete="name" minlength="2">
+                                <p class="field-error"></p>
                             </div>
                             <div class="field">
                                 <label for="c-email">Email address</label>
                                 <input type="email" id="c-email" name="c-email" required autocomplete="email">
+                                <p class="field-error"></p>
                             </div>
                         </div>
 
                         <div class="field">
                             <label for="c-subject">Subject</label>
-                            <input type="text" id="c-subject" name="c-subject" required>
+                            <input type="text" id="c-subject" name="c-subject" required minlength="3">
+                            <p class="field-error"></p>
                         </div>
 
                         <div class="field">
                             <label for="c-message">Message</label>
-                            <textarea id="c-message" name="c-message" rows="5" required></textarea>
+                            <textarea id="c-message" name="c-message" rows="5" required minlength="10"></textarea>
+                            <p class="field-error"></p>
                         </div>
 
-                        <button type="submit" class="btn">Send message</button>
-
-                        <p class="form-note">For stockist or sponsorship requests, please use the <a href="enquiry.html" style="text-decoration:underline;">enquiry page</a> instead.</p>
+                        <button type="submit" class="btn">Compile &amp; send message</button>
+                        <p class="form-note">This opens your own email app with everything filled in — you send it from there. For stockist or sponsorship requests, please use the <a href="enquiry.html" style="text-decoration:underline;">enquiry page</a> instead.</p>
 
                         <div class="form-status" role="status" aria-live="polite"></div>
                     </form>
@@ -116,7 +153,6 @@
         </section>
     </main>
 
-    <!-- ============ FOOTER ============ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
@@ -125,7 +161,6 @@
                     <p style="color:var(--grey); margin-top:0.75rem; max-width:32ch; font-size:0.9rem;">Bold, locally made streetwear, grown in Johannesburg.</p>
                     <div class="stamp" style="width:96px;height:96px;" data-stamp></div>
                 </div>
-
                 <div>
                     <h3>Site</h3>
                     <ul>
@@ -134,7 +169,6 @@
                         <li><a href="products.html">Products</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Get in touch</h3>
                     <ul>
@@ -142,16 +176,14 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Follow</h3>
                     <ul>
-                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <span>&copy; 2026 Kholo Streetwear. Hypothetical brand created for a student website project.</span>
                 <span>Site by Molibeli Molapo</span>
@@ -159,6 +191,9 @@
         </div>
     </footer>
 
+    <!-- Leaflet JS (free, no API key) -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="js/script.js"></script>
 </body>
 </html>
