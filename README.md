@@ -44,7 +44,7 @@ kholo-streetwear/
 ├── js/
 │   └── script.js
 ├── images/
-│   └── icon-*.svg / icon-*.png   (10 original icons/illustrations)
+│   └── icon-*.svg / icon-*.png   (8 original icons/illustrations — see note below)
 └── README.md
 ```
 
@@ -56,6 +56,26 @@ kholo-streetwear/
 
 Both Part 1 and Part 2 were approved by the lecturer with no requested
 corrections. All work below is new, added on top of the approved submissions.
+
+### Images — a hybrid approach
+
+The **Tees** and **Hoodies** ranges (on both the homepage and Products page)
+use real, free-to-use photographs sourced from Unsplash (Unsplash License —
+free for commercial use, no attribution required):
+- T-shirt: photo by Ryan Hoffman — <https://unsplash.com/photos/black-crew-neck-t-shirt-6Nub980bI3I>
+- Hoodie: photo via Unsplash — <https://unsplash.com/photos/black-jacket-hanging-on-rope-during-daytime-qq-YDhd3bbg>
+
+These are referenced directly by their Unsplash CDN URL (`images.unsplash.com/...`)
+rather than downloaded into `/images`, the same way the site already loads
+Google Fonts and map tiles from external CDNs.
+
+The **Headwear** and **Accessories** ranges still use the original
+hand-drawn icon artwork from Part 2, since a suitably licensed real photo
+for bucket hats, beanies, totes, socks and pins hadn't been sourced yet at
+submission time. Swapping any of these to a real photo later only requires
+adding a `photo:` URL to that product's entry in the `PRODUCTS` array in
+`js/script.js` — `renderProducts()` already prefers a real photo over the
+icon whenever one is present.
 
 ### 2. Functionality
 
@@ -188,6 +208,9 @@ Either option gives automatic HTTPS, satisfying the security requirement above.
   [online] Available at: <https://leafletjs.com/> [Accessed 16 September 2026].
 - OpenStreetMap Contributors, n.d. *OpenStreetMap.* [online] Available at:
   <https://www.openstreetmap.org/copyright> [Accessed 16 September 2026]. (Map tile data.)
+- Unsplash, n.d. *Unsplash License.* [online] Available at:
+  <https://unsplash.com/license> [Accessed 14 October 2026]. (Free-to-use
+  photography — tee and hoodie product photos on Home and Products.)
 - Esri, n.d. *World Street Map.* [online] Available at:
   <https://www.arcgis.com/home/item.html?id=3b93337983e9436f8db950e38a8629af>
   [Accessed 14 October 2026]. (Free, no-API-key map tiles — used after both
@@ -252,3 +275,8 @@ Either option gives automatic HTTPS, satisfying the security requirement above.
   key (policy change), so switched again to **Esri's World Street Map**
   tiles — a long-standing free, no-signup public tile service — which is
   what the map actually uses now.
+- **v0.3.3** — Replaced the icon artwork for the Tees and Hoodies ranges
+  (Home and Products) with real, free-to-use Unsplash photographs. Headwear
+  and Accessories still use the original icons pending a suitably licensed
+  photo for each — see "Images — a hybrid approach" above for how to extend
+  this later.
