@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products — Kholo Streetwear</title>
-    <meta name="description" content="Browse Kholo Streetwear's tees, hoodies, headwear and accessories, designed and made in Johannesburg.">
+    <title>Shop Tees, Hoodies &amp; Caps | Kholo Streetwear Products</title>
+    <meta name="description" content="Browse Kholo Streetwear's tees, hoodies, headwear and accessories — all designed in Braamfontein and printed, cut or embroidered by local Johannesburg makers.">
+    <link rel="canonical" href="https://kholostreetwear.co.za/products.html">
+    <meta property="og:title" content="Kholo Streetwear Products">
+    <meta property="og:description" content="Four ranges. One attitude. Shop Kholo's tees, hoodies, headwear and accessories.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kholostreetwear.co.za/products.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- ============ HEADER / NAVIGATION ============ -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!--
+        PRODUCTS PAGE (products.html)
+        The grid below is NOT hand-written per product: js/script.js holds
+        a PRODUCTS data array and renders cards into [data-products-mount]
+        dynamically (Part 3, section 2.2). The tab buttons and search box
+        filter that same array and re-render it, rather than hiding/showing
+        pre-built HTML blocks.
+    -->
+
     <header class="site-header">
-        <nav class="nav container">
+        <nav class="nav container" aria-label="Primary">
             <a href="index.html" class="logo">KHOLO<span>.</span></a>
-
             <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-
             <ul class="nav-links" id="primary-nav">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -26,188 +41,40 @@
         </nav>
     </header>
 
-    <main>
-        <!-- ============ PAGE INTRO ============ -->
+    <main id="main">
         <section class="page-hero">
             <div class="container">
                 <span class="eyebrow">The range</span>
                 <h1>Four ranges.<br>One attitude.</h1>
-                <p>Every piece is designed in Braamfontein and printed, cut or embroidered by local makers. Prices shown are current retail — stockists get wholesale pricing via the enquiry page.</p>
+                <p>Every piece is designed in Braamfontein and printed, cut or embroidered by local makers. Prices shown are current retail — stockists get wholesale pricing via the enquiry page. Tap a product image for a closer look.</p>
             </div>
         </section>
 
-        <!-- ============ TEES ============ -->
-        <section id="tees">
+        <section class="reveal">
             <div class="container">
-                <div class="section-head">
-                    <h2>Tees</h2>
-                    <span class="tag">Heavyweight cotton</span>
+
+                <!-- Tabs: filter by category (Part 3, 2.1) -->
+                <div class="tabs-nav" role="tablist" aria-label="Filter by category">
+                    <button class="tab-btn" role="tab" data-category="all" aria-selected="true">All</button>
+                    <button class="tab-btn" role="tab" data-category="tees" aria-selected="false">Tees</button>
+                    <button class="tab-btn" role="tab" data-category="hoodies" aria-selected="false">Hoodies</button>
+                    <button class="tab-btn" role="tab" data-category="headwear" aria-selected="false">Headwear</button>
+                    <button class="tab-btn" role="tab" data-category="accessories" aria-selected="false">Accessories</button>
                 </div>
 
-                <div class="grid">
-                    <article class="card">
-                        <img src="images/download (4).webp" alt="...">
-                        <div class="card-body">
-                            <span class="drop">DROP 003</span>
-                            <h3>The Foundation Tee</h3>
-                            <p>Oversized fit, 240gsm cotton, screen-printed stamp logo across the chest.</p>
-                            <span class="price">R450</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <img src="images
-                        <div class="card-body">images/
-                            <span class="drop">DROP 003</span>
-                            <h3>Jozi Skyline Tee</h3>
-                            <p>Back-print skyline graphic, ribbed collar, garment-dyed for a worn-in look.</p>
-                            <span class="price">R480</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-media">Khulu Longsleeve</div>
-                        <img src="images/th.jpg">
-                        <div class="card-body">
-                            <span class="drop">DROP 001</span>
-                            <h3>Khulu Longsleeve</h3>
-                            <p>Midweight long-sleeve tee with a sleeve-print wordmark.</p>
-                            <span class="price">R520</span>
-                        </div>
-                    </article>
+                <!-- Search/filter (Part 3, 2.2) -->
+                <div class="filter-bar">
+                    <label for="product-search" class="sr-only">Search products</label>
+                    <input type="search" id="product-search" data-product-search placeholder="Search products (e.g. hoodie, tote, R450)">
+                    <span class="filter-count" data-filter-count>12 of 12 products</span>
                 </div>
+
+                <!-- Products render here via JS -->
+                <div class="grid" data-products-mount></div>
             </div>
         </section>
 
-        <!-- ============ HOODIES ============ -->
-        <section id="hoodies">
-            <div class="container">
-                <div class="section-head">
-                    <h2>Hoodies</h2>
-                    <span class="tag">Fleece-lined</span>
-                </div>
-
-                <div class="grid">
-                    <article class="card">
-                        <div class="card-media">Khulu Hoodie</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 002</span>
-                            <h3>The Khulu Hoodie</h3>
-                            <p>Boxy fit, brushed fleece lining, built for Highveld winters.</p>
-                            <span class="price">R950</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-media">Stamp Zip-Up</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 002</span>
-                            <h3>Stamp Zip-Up</h3>
-                            <p>Full-zip hoodie with an embroidered circular stamp on the chest.</p>
-                            <span class="price">R1 050</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-media">Alexandra Crewneck</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 004</span>
-                            <h3>Alexandra Crewneck</h3>
-                            <p>Cropped crewneck sweatshirt, named for one of Kholo's home neighbourhoods.</p>
-                            <span class="price">R850</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ HEADWEAR ============ -->
-        <section id="headwear">
-            <div class="container">
-                <div class="section-head">
-                    <h2>Headwear</h2>
-                    <span class="tag">Caps &amp; beanies</span>
-                </div>
-
-                <div class="grid">
-                    <article class="card">
-                        <div class="card-media">Jozi Bucket Cap</div>
-                        <img src="images/High-Quality-3D-Embroidery-Logo-Green-Snapback-Hat-Custom-Fitted-Cap-Casual-Sport-Gorras.webp">
-                        <div class="card-body">
-                            <span class="drop">DROP 004</span>
-                            <h3>Jozi Bucket Cap</h3>
-                            <p>Reversible bucket hat with an embroidered stamp logo on both sides.</p>
-                            <span class="price">R380</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-media">Stamp Beanie</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 002</span>
-                            <h3>Stamp Beanie</h3>
-                            <p>Ribbed knit beanie with a woven Kholo tab.</p>
-                            <span class="price">R320</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-media">Foundation Cap</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 001</span>
-                            <h3>Foundation Cap</h3>
-                            <p>Structured six-panel cap with an embroidered front logo.</p>
-                            <span class="price">R400</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ ACCESSORIES ============ -->
-        <section id="accessories">
-            <div class="container">
-                <div class="section-head">
-                    <h2>Accessories</h2>
-                    <span class="tag">Bags &amp; extras</span>
-                </div>
-
-                <div class="grid">
-                    <article class="card">
-                        <div class="card-media">Market Tote</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 001</span>
-                            <h3>Market Tote</h3>
-                            <p>Canvas tote sized for a flea-market haul, printed with the Kholo wordmark.</p>
-                            <span class="price">R250</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-media">Stamp Socks</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 003</span>
-                            <h3>Stamp Socks (2-pack)</h3>
-                            <p>Ribbed crew socks with a woven stamp logo.</p>
-                            <span class="price">R180</span>
-                        </div>
-                    </article>
-
-                    <article class="card">
-                        <div class="card-media">Pin Set</div>
-                        <div class="card-body">
-                            <span class="drop">DROP 003</span>
-                            <h3>Kholo Pin Set</h3>
-                            <p>Set of three enamel pins, sold at markets and now online.</p>
-                            <span class="price">R150</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ STOCKIST CTA ============ -->
-        <section class="cta-band">
+        <section class="cta-band reveal">
             <div class="container split">
                 <div>
                     <span class="eyebrow" style="color:var(--orange)">Buying in bulk?</span>
@@ -217,12 +84,14 @@
                         <a href="enquiry.html" class="btn">Enquire now</a>
                     </div>
                 </div>
-                <div class="media-block">Wholesale enquiries</div>
+                <div class="media-block">
+                    <img src="images/illustration-wholesale.svg" alt="Illustration of wholesale delivery boxes" loading="lazy">
+                    <span>Wholesale enquiries</span>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- ============ FOOTER ============ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-top">
@@ -231,7 +100,6 @@
                     <p style="color:var(--grey); margin-top:0.75rem; max-width:32ch; font-size:0.9rem;">Bold, locally made streetwear, grown in Johannesburg.</p>
                     <div class="stamp" style="width:96px;height:96px;" data-stamp></div>
                 </div>
-
                 <div>
                     <h3>Site</h3>
                     <ul>
@@ -240,7 +108,6 @@
                         <li><a href="products.html">Products</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Get in touch</h3>
                     <ul>
@@ -248,22 +115,29 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-
                 <div>
                     <h3>Follow</h3>
                     <ul>
-                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener">TikTok</a></li>
+                        <li><a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">TikTok</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <span>&copy; 2026 Kholo Streetwear. Hypothetical brand created for a student website project.</span>
                 <span>Site by Molibeli Molapo</span>
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox gallery markup (Part 3, 2.1) — one shared instance, filled in by JS on click -->
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Product image">
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close">&times;</button>
+            <img src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>
